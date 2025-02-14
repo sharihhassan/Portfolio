@@ -50,7 +50,6 @@ nav {
     top: 15px;
     right: 20px;
 }
-
 nav ul li a:hover {
     color: #0047AB;
 }
@@ -67,14 +66,27 @@ nav ul li a:hover {
     z-index: 11;
     position: absolute;
 }
+.show {
+    display: block;
+}
 /* Here I have set what will be displayed on mobile device */
 @media (max-width: 600px) {
-    
+    nav ul li {
+        padding: 5px;
+    }
+    nav ul li a {
+        color: white;
+        font-weight: bolder;
+    }
+    nav ul li a:hover {
+        color: #FFC107;
+    }
+
     nav {
         display: none;
         position: absolute;
         top: 60px;
-        background-color: white;
+        background-color: #0047AB;
         border: 1px solid black;
         border-radius: 5px;
         width: 200px;
@@ -528,6 +540,16 @@ body {
         max-width: 400px;
     }
 }
+.carousel-container {
+    display: flex;
+    width: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
 
 /* Here I am working on Footer */
 footer {
@@ -537,6 +559,7 @@ footer {
     text-align: center;
     align-items: center;
     padding: 20px;
+    font-weight: bold;
 }
 .footer-data {
     display: flex;
@@ -559,4 +582,9 @@ footer {
         display: flex;
         justify-content: space-around;
         width: 50%;
+}
+
+/* Fixing HTML Scroll */
+html {
+    scroll-behavior: smooth;
 }
