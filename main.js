@@ -1,50 +1,47 @@
-// Selecting the menu toggle button and navigation menu
-const menuToggle = document.querySelector(".nav-toggle");
-const navMenu = document.querySelector(".nav-menu");
-
-// Adding click event listener
-menuToggle.addEventListener("click", function () {
-    navMenu.classList.toggle("show");
-});
-
-
-// Here I am Writing Js for Carousal
+// Ensure DOM is loaded before running scripts
 document.addEventListener("DOMContentLoaded", function () {
+    
+    // Menu Toggle Fix
+    const menuToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("show");
+        });
+    }
+
+    // Carousel Script
     const carouselContainer = document.querySelector(".carousel-container");
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
     const items = document.querySelectorAll(".carousel-item");
+    
     let index = 0;
 
     function updateCarousel() {
-        const offset = -index * 100;
-        carouselContainer.style.transform = `translateX(${offset}%)`;
+        if (carouselContainer) {
+            const offset = -index * 100;
+            carouselContainer.style.transform = `translateX(${offset}%)`;
+        }
     }
 
-    nextButton.addEventListener("click", function () {
-        if (index < items.length - 1) {
-            index++;
-        } else {
-            index = 0;
-        }
-        updateCarousel();
-    });
+    if (prevButton && nextButton && carouselContainer && items.length > 0) {
+        nextButton.addEventListener("click", function () {
+            index = (index + 1) % items.length;
+            updateCarousel();
+        });
 
-    prevButton.addEventListener("click", function () {
-        if (index > 0) {
-            index--;
-        } else {
-            index = items.length - 1;
-        }
-        updateCarousel();
-    });
+        prevButton.addEventListener("click", function () {
+            index = (index - 1 + items.length) % items.length;
+            updateCarousel();
+        });
 
-    setInterval(() => {
-        if (index < items.length - 1) {
-            index++;
-        } else {
-            index = 0;
-        }
-        updateCarousel();
-    }, 3000);
+        setInterval(() => {
+            index = (index + 1) % items.length;
+            updateCarousel();
+        }, 3000);
+
+        window.addEventListener("resize", updateCarousel);
+    }
 });
